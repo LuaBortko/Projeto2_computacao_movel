@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -81,7 +81,7 @@ class Criar extends React.Component {
   };
   /*Nessa função eu pego e comparo se o estado do id(nesse caso b1, b2 ...) é o da cor branca, ou preta e as inverto*/
 
-  async gravar() { //Fazer dps uma confirmação se realmente quer salvar
+  async gravar() {
   try {
     const estado = {
       p: this.state.p,
@@ -95,10 +95,11 @@ class Criar extends React.Component {
       b8: this.state.b8,
       b9: this.state.b9,
     };
-    await AsyncStorage.setItem('estados', JSON.stringify(estado));
+    await AsyncStorage.setItem(`estados_p${this.state.p}`, JSON.stringify(estado));
+    /*Assim consigo guardar cada projeto em uma chave diferente */
     alert("Salvo com sucesso!!!");
   } catch (erro) {
-    alert("Erro"); 
+    alert("Erro ao salvar os dados"); 
   }
 }
   /*Função que grava na memoria do celular, foi necessario modificar a função, pois eu estava querendo salvar todos separadamente em uma mesma função, oque não é possivel-> para resolver criei um objeto que guarda os estados atuais dos botões e dps para guardar no AsyncStorage tive que transformar esse objeto em string pois senão a função não aceitaria*/
@@ -146,11 +147,279 @@ class Criar extends React.Component {
   }
 }
 
-class Galeria extends React.Component{
+class Projeto1 extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      carregando: true,
+      b1: '#FFFFFF',
+      b2: '#FFFFFF',
+      b3: '#FFFFFF',
+      b4: '#FFFFFF',
+      b5: '#FFFFFF',
+      b6: '#FFFFFF',
+      b7: '#FFFFFF',
+      b8: '#FFFFFF',
+      b9: '#FFFFFF',
+    };
+  }
+/*A focusListener é usada para que toda vez que a tela entre em foco ela seja atualizada */
+ componentDidMount() {
+    this.focusListener = this.props.navigation.addListener('focus', () => { this.ler() });
+  }
+
+  async ler() {
+  try {
+    const salvo = await AsyncStorage.getItem(`estados_p${1}`);
+    if (salvo) {
+      const parsedState = JSON.parse(salvo);
+      this.setState({
+        b1: parsedState.b1,
+        b2: parsedState.b2,
+        b3: parsedState.b3,
+        b4: parsedState.b4,
+        b5: parsedState.b5,
+        b6: parsedState.b6,
+        b7: parsedState.b7,
+        b8: parsedState.b8,
+        b9: parsedState.b9
+      });
+    }
+  } catch (error) {
+    console.error("Erro ao recuperar dados");
+  }
+}
+
   render(){
     return(
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
+     <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
+        <View style={estilos.quadrado}>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b1 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b2 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b3 }]}></Text>
+        </View>
+        <View style={estilos.quadrado}>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b4 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b5 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b6 }]}></Text>
+        </View>
+        <View style={estilos.quadrado}>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b7 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b8 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b9 }]}></Text>
+        </View>
+        <View style={estilos.setas}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate("Projeto2")}><MaterialCommunityIcons name="arrow-right" color={"black"} size={24}/></TouchableOpacity>
+        </View>
+    </View>
+    )
+  }
+}
+
+class Projeto2 extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      carregando: true,
+      b1: '#FFFFFF',
+      b2: '#FFFFFF',
+      b3: '#FFFFFF',
+      b4: '#FFFFFF',
+      b5: '#FFFFFF',
+      b6: '#FFFFFF',
+      b7: '#FFFFFF',
+      b8: '#FFFFFF',
+      b9: '#FFFFFF',
+    };
+  }
+/*A focusListener é usada para que toda vez que a tela entre em foco ela seja atualizada */
+ componentDidMount() {
+    this.focusListener = this.props.navigation.addListener('focus', () => { this.ler() });
+  }
+
+  async ler() {
+  try {
+    const salvo = await AsyncStorage.getItem(`estados_p${2}`);
+    if (salvo) {
+      const parsedState = JSON.parse(salvo);
+      this.setState({
+        b1: parsedState.b1,
+        b2: parsedState.b2,
+        b3: parsedState.b3,
+        b4: parsedState.b4,
+        b5: parsedState.b5,
+        b6: parsedState.b6,
+        b7: parsedState.b7,
+        b8: parsedState.b8,
+        b9: parsedState.b9
+      });
+    }
+  } catch (error) {
+    console.error("Erro ao recuperar dados");
+  }
+}
+
+  render(){
+    return(
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+     <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
+        <View style={estilos.quadrado}>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b1 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b2 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b3 }]}></Text>
+        </View>
+        <View style={estilos.quadrado}>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b4 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b5 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b6 }]}></Text>
+        </View>
+        <View style={estilos.quadrado}>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b7 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b8 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b9 }]}></Text>
+        </View>
+        <View style={estilos.setas}>
+          <TouchableOpacity onPress={() => this.props.navigation.goBack()}><MaterialCommunityIcons name="arrow-left" color={"black"} size={24}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate("Projeto3")}><MaterialCommunityIcons name="arrow-right" color={"black"} size={24}/></TouchableOpacity>
+        </View>
+    </View>
+    )
+  }
+}
+
+class Projeto3 extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      b1: '#FFFFFF',
+      b2: '#FFFFFF',
+      b3: '#FFFFFF',
+      b4: '#FFFFFF',
+      b5: '#FFFFFF',
+      b6: '#FFFFFF',
+      b7: '#FFFFFF',
+      b8: '#FFFFFF',
+      b9: '#FFFFFF',
+    };
+  }
+/*A focusListener é usada para que toda vez que a tela entre em foco ela seja atualizada */
+ componentDidMount() {
+    this.focusListener = this.props.navigation.addListener('focus', () => { this.ler() });
+  }
+  async ler() {
+  try {
+    const salvo = await AsyncStorage.getItem(`estados_p${3}`);
+    if (salvo) {
+      const parsedState = JSON.parse(salvo);
+      this.setState({
+        b1: parsedState.b1,
+        b2: parsedState.b2,
+        b3: parsedState.b3,
+        b4: parsedState.b4,
+        b5: parsedState.b5,
+        b6: parsedState.b6,
+        b7: parsedState.b7,
+        b8: parsedState.b8,
+        b9: parsedState.b9
+      });
+    }
+  } catch (error) {
+    console.error("Erro ao recuperar dados");
+  }
+}
+
+  render(){
+    return(
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+     <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
+        <View style={estilos.quadrado}>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b1 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b2 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b3 }]}></Text>
+        </View>
+        <View style={estilos.quadrado}>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b4 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b5 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b6 }]}></Text>
+        </View>
+        <View style={estilos.quadrado}>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b7 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b8 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b9 }]}></Text>
+        </View>
+        <View style={estilos.setas}>
+          <TouchableOpacity onPress={() => this.props.navigation.goBack()}><MaterialCommunityIcons name="arrow-left" color={"black"} size={24}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate("Projeto4")}><MaterialCommunityIcons name="arrow-right" color={"black"} size={24}/></TouchableOpacity>
+        </View>
+    </View>
+    )
+  }
+}
+
+class Projeto4 extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      b1: '#FFFFFF',
+      b2: '#FFFFFF',
+      b3: '#FFFFFF',
+      b4: '#FFFFFF',
+      b5: '#FFFFFF',
+      b6: '#FFFFFF',
+      b7: '#FFFFFF',
+      b8: '#FFFFFF',
+      b9: '#FFFFFF',
+    };
+  }
+/*A focusListener é usada para que toda vez que a tela entre em foco ela seja atualizada */
+ componentDidMount() {
+    this.focusListener = this.props.navigation.addListener('focus', () => { this.ler() });
+  }
+ async ler() {
+  try {
+    const salvo = await AsyncStorage.getItem(`estados_p${4}`);
+    if (salvo) {
+      const parsedState = JSON.parse(salvo);
+      this.setState({
+        b1: parsedState.b1,
+        b2: parsedState.b2,
+        b3: parsedState.b3,
+        b4: parsedState.b4,
+        b5: parsedState.b5,
+        b6: parsedState.b6,
+        b7: parsedState.b7,
+        b8: parsedState.b8,
+        b9: parsedState.b9
+      });
+    }
+  } catch (error) {
+    console.error("Erro ao recuperar dados");
+  }
+}
+
+  render(){
+    return(
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+     <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
+        <View style={estilos.quadrado}>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b1 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b2 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b3 }]}></Text>
+        </View>
+        <View style={estilos.quadrado}>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b4 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b5 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b6 }]}></Text>
+        </View>
+        <View style={estilos.quadrado}>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b7 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b8 }]}></Text>
+            <Text style={[estilos.blocos, { backgroundColor: this.state.b9 }]}></Text>
+        </View>
+        <View style={estilos.setas}>
+          <TouchableOpacity onPress={() => this.props.navigation.goBack()}><MaterialCommunityIcons name="arrow-left" color={"black"} size={24}/></TouchableOpacity>
+        </View>
     </View>
     )
   }
@@ -183,6 +452,19 @@ class Criacao extends React.Component {
       <Stack.Navigator>
         <Stack.Screen name = "Projetos" component ={Projetos} options = {{headerShown: false}}/>
         <Stack.Screen name = "Criar" component ={Criar} options = {{headerShown: false}}/>
+      </Stack.Navigator>
+    )
+  }
+}
+
+class Galeria extends React.Component {
+  render() {
+    return(
+      <Stack.Navigator>
+        <Stack.Screen name = "Projeto1" component ={Projeto1} />
+        <Stack.Screen name = "Projeto2" component ={Projeto2} />
+        <Stack.Screen name = "Projeto3" component ={Projeto3} />
+        <Stack.Screen name = "Projeto4" component ={Projeto4} />
       </Stack.Navigator>
     )
   }
@@ -221,6 +503,9 @@ const estilos = StyleSheet.create({
     backgroundColor: '#4CAF50', 
     padding: 10, 
     borderRadius: 5, 
+  },
+  setas:{
+    flexDirection: 'row'
   }
 })
 
