@@ -40,6 +40,7 @@ class Projetos extends React.Component{
   render(){
     return(
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
       <TouchableOpacity onPress={() => this.decide(1)} style={estilos.botao}><Text>{"Projeto1"}</Text></TouchableOpacity>
       <TouchableOpacity onPress={() => this.decide(2)} style={estilos.botao}><Text>{"Projeto2"}</Text></TouchableOpacity>
       <TouchableOpacity onPress={() => this.decide(3)} style={estilos.botao}><Text>{"Projeto3"}</Text></TouchableOpacity>
@@ -149,7 +150,7 @@ class Galeria extends React.Component{
   render(){
     return(
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      
+    <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
     </View>
     )
   }
