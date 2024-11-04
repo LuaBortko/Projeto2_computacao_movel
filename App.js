@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TextInput, Text, View, Button,TouchableOpacity, StyleSheet } from 'react-native';
+import { TextInput, Text, View, Button,TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
@@ -24,10 +24,12 @@ class Sobre extends React.Component{
 class Menu extends React.Component{
   render(){
     return(
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Button title="Começar" onPress={()=>this.props.navigation.navigate("Principal")}></Button>
-      <Button title="Sobre" onPress={()=>this.props.navigation.navigate("Sobre")}></Button>
-    </View>
+    <ImageBackground source={require('./assets/Tela2.png')} style={estilos.fundo} imageStyle={{ opacity: 0.5}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Button title="Começar" onPress={()=>this.props.navigation.navigate("Principal")}></Button>
+        <Button title="Sobre" onPress={()=>this.props.navigation.navigate("Sobre")}></Button>
+      </View>
+  </ImageBackground>
     )
   }
 }
@@ -39,13 +41,15 @@ class Projetos extends React.Component{
   };
   render(){
     return(
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
-      <TouchableOpacity onPress={() => this.decide(1)} style={estilos.botao}><Text>{"Projeto1"}</Text></TouchableOpacity>
-      <TouchableOpacity onPress={() => this.decide(2)} style={estilos.botao}><Text>{"Projeto2"}</Text></TouchableOpacity>
-      <TouchableOpacity onPress={() => this.decide(3)} style={estilos.botao}><Text>{"Projeto3"}</Text></TouchableOpacity>
-      <TouchableOpacity onPress={() => this.decide(4)} style={estilos.botao}><Text>{"Projeto4"}</Text></TouchableOpacity>
-    </View>
+    <ImageBackground source={require('./assets/Tela2.png')} style={estilos.fundo} imageStyle={{ opacity: 0.5}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => this.decide(1)} style={estilos.botao}><Text>{"Projeto1"}</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => this.decide(2)} style={estilos.botao}><Text>{"Projeto2"}</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => this.decide(3)} style={estilos.botao}><Text>{"Projeto3"}</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => this.decide(4)} style={estilos.botao}><Text>{"Projeto4"}</Text></TouchableOpacity>
+      </View>
+    </ImageBackground>
     )
   }
 }
@@ -89,7 +93,7 @@ class Criar extends React.Component {
    handlePress = (id) => { -> assim posso passar parametros para uma função
     alert(`Botão ${id} pressionado!`);
   };
-*/
+  */
   pintar = (id) => {
     this.setState((prevState) => ({
       [id]: prevState[id] === '#FFFFFF' ? '#000000' : '#FFFFFF', 
@@ -410,47 +414,49 @@ class Projeto1 extends React.Component{
 
   render(){
     return(
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-     <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b1 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b2 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b3 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b4 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b5 }]}></Text>
-        </View>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b6 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b7 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b8 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b9 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b10 }]}></Text>
-        </View>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b11 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b12 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b13 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b14 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b15 }]}></Text>
-        </View>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b16 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b17 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b18 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b19 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b20 }]}></Text>
-        </View>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b21 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b22 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b23 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b24 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b25 }]}></Text>
-        </View>
-        <View style={estilos.setas}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate("Projeto2")}><MaterialCommunityIcons name="arrow-right" color={"black"} size={24}/></TouchableOpacity>
-        </View>
-    </View>
+     <ImageBackground source={require('./assets/Tela2.png')} style={estilos.fundo} imageStyle={{ opacity: 0.5}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
+          <View style={estilos.quadrado}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b1 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b2 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b3 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b4 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b5 }]}></Text>
+          </View>
+          <View style={estilos.quadrado}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b6 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b7 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b8 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b9 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b10 }]}></Text>
+          </View>
+          <View style={estilos.quadrado}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b11 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b12 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b13 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b14 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b15 }]}></Text>
+          </View>
+          <View style={estilos.quadrado}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b16 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b17 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b18 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b19 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b20 }]}></Text>
+          </View>
+          <View style={estilos.quadrado}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b21 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b22 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b23 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b24 }]}></Text>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b25 }]}></Text>
+          </View>
+          <View style={estilos.setas}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate("Projeto2")}><MaterialCommunityIcons name="arrow-right" color={"black"} size={24}/></TouchableOpacity>
+          </View>
+      </View>
+     </ImageBackground>
     )
   }
 }
@@ -531,48 +537,53 @@ class Projeto2 extends React.Component{
 
   render(){
     return(
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-     <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b1 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b2 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b3 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b4 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b5 }]}></Text>
+      <ImageBackground source={require('./assets/Tela2.png')} style={estilos.fundo} imageStyle={{ opacity: 0.5}}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
+            <View style={estilos.quadrado}>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b1 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b2 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b3 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b4 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b5 }]}></Text>
+            </View>
+            <View style={estilos.quadrado}>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b6 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b7 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b8 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b9 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b10 }]}></Text>
+            </View>
+            <View style={estilos.quadrado}>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b11 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b12 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b13 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b14 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b15 }]}></Text>
+            </View>
+            <View style={estilos.quadrado}>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b16 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b17 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b18 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b19 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b20 }]}></Text>
+            </View>
+            <View style={estilos.quadrado}>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b21 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b22 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b23 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b24 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b25 }]}></Text>
+            </View>
+            <View style={estilos.setas}>
+              <TouchableOpacity onPress={() => this.props.navigation.goBack()}><MaterialCommunityIcons name="arrow-left" color={"black"} size={24}/>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate("Projeto3")}>
+              <MaterialCommunityIcons name="arrow-right" color={"black"} size={24}/>
+              </TouchableOpacity>
+            </View>
         </View>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b6 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b7 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b8 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b9 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b10 }]}></Text>
-        </View>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b11 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b12 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b13 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b14 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b15 }]}></Text>
-        </View>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b16 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b17 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b18 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b19 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b20 }]}></Text>
-        </View>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b21 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b22 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b23 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b24 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b25 }]}></Text>
-        </View>
-        <View style={estilos.setas}>
-          <TouchableOpacity onPress={() => this.props.navigation.goBack()}><MaterialCommunityIcons name="arrow-left" color={"black"} size={24}/></TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate("Projeto3")}><MaterialCommunityIcons name="arrow-right" color={"black"} size={24}/></TouchableOpacity>
-        </View>
-    </View>
+      </ImageBackground>
     )
   }
 }
@@ -652,48 +663,53 @@ class Projeto3 extends React.Component{
 
   render(){
     return(
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-     <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
-       <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b1 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b2 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b3 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b4 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b5 }]}></Text>
+      <ImageBackground source={require('./assets/Tela2.png')} style={estilos.fundo} imageStyle={{ opacity: 0.5}}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
+          <View style={estilos.quadrado}>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b1 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b2 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b3 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b4 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b5 }]}></Text>
+            </View>
+            <View style={estilos.quadrado}>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b6 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b7 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b8 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b9 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b10 }]}></Text>
+            </View>
+            <View style={estilos.quadrado}>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b11 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b12 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b13 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b14 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b15 }]}></Text>
+            </View>
+            <View style={estilos.quadrado}>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b16 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b17 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b18 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b19 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b20 }]}></Text>
+            </View>
+            <View style={estilos.quadrado}>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b21 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b22 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b23 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b24 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b25 }]}></Text>
+            </View>
+            <View style={estilos.setas}>
+              <TouchableOpacity onPress={() => this.props.navigation.goBack()}><MaterialCommunityIcons name="arrow-left" color={"black"} size={24}/>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate("Projeto4")}>
+              <MaterialCommunityIcons name="arrow-right" color={"black"} size={24}/>
+              </TouchableOpacity>
+            </View>
         </View>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b6 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b7 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b8 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b9 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b10 }]}></Text>
-        </View>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b11 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b12 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b13 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b14 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b15 }]}></Text>
-        </View>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b16 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b17 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b18 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b19 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b20 }]}></Text>
-        </View>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b21 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b22 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b23 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b24 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b25 }]}></Text>
-        </View>
-        <View style={estilos.setas}>
-          <TouchableOpacity onPress={() => this.props.navigation.goBack()}><MaterialCommunityIcons name="arrow-left" color={"black"} size={24}/></TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate("Projeto4")}><MaterialCommunityIcons name="arrow-right" color={"black"} size={24}/></TouchableOpacity>
-        </View>
-    </View>
+      </ImageBackground>
     )
   }
 }
@@ -773,47 +789,49 @@ class Projeto4 extends React.Component{
 
   render(){
     return(
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-     <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b1 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b2 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b3 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b4 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b5 }]}></Text>
+      <ImageBackground source={require('./assets/Tela2.png')} style={estilos.fundo} imageStyle={{ opacity: 0.5}}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
+            <View style={estilos.quadrado}>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b1 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b2 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b3 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b4 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b5 }]}></Text>
+            </View>
+            <View style={estilos.quadrado}>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b6 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b7 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b8 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b9 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b10 }]}></Text>
+            </View>
+            <View style={estilos.quadrado}>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b11 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b12 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b13 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b14 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b15 }]}></Text>
+            </View>
+            <View style={estilos.quadrado}>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b16 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b17 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b18 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b19 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b20 }]}></Text>
+            </View>
+            <View style={estilos.quadrado}>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b21 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b22 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b23 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b24 }]}></Text>
+                <Text style={[estilos.blocos, { backgroundColor: this.state.b25 }]}></Text>
+            </View>
+            <View style={estilos.setas}>
+              <TouchableOpacity onPress={() => this.props.navigation.goBack()}><MaterialCommunityIcons name="arrow-left" color={"black"} size={24}/></TouchableOpacity>
+            </View>
         </View>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b6 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b7 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b8 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b9 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b10 }]}></Text>
-        </View>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b11 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b12 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b13 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b14 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b15 }]}></Text>
-        </View>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b16 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b17 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b18 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b19 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b20 }]}></Text>
-        </View>
-        <View style={estilos.quadrado}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b21 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b22 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b23 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b24 }]}></Text>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b25 }]}></Text>
-        </View>
-        <View style={estilos.setas}>
-          <TouchableOpacity onPress={() => this.props.navigation.goBack()}><MaterialCommunityIcons name="arrow-left" color={"black"} size={24}/></TouchableOpacity>
-        </View>
-    </View>
+      </ImageBackground>
     )
   }
 }
@@ -900,6 +918,11 @@ const estilos = StyleSheet.create({
   },
   setas:{
     flexDirection: 'row'
+  },
+  fundo:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 })
 
