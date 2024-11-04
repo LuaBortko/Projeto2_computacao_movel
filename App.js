@@ -80,6 +80,31 @@ class Criar extends React.Component {
     }));
   };
   /*Nessa função eu pego e comparo se o estado do id(nesse caso b1, b2 ...) é o da cor branca, ou preta e as inverto*/
+  componentDidMount() {
+    this.focusListener = this.props.navigation.addListener('focus', () => { this.ler() });
+  }
+
+  async ler() {
+  try {
+    const salvo = await AsyncStorage.getItem(`estados_p${this.state.p}`);
+    if (salvo) {
+      const parsedState = JSON.parse(salvo);
+      this.setState({
+        b1: parsedState.b1,
+        b2: parsedState.b2,
+        b3: parsedState.b3,
+        b4: parsedState.b4,
+        b5: parsedState.b5,
+        b6: parsedState.b6,
+        b7: parsedState.b7,
+        b8: parsedState.b8,
+        b9: parsedState.b9
+      });
+    }
+  } catch (error) {
+    alert("Erro ao recuperar dados");
+  }
+}
 
   async gravar() {
   try {
@@ -99,7 +124,7 @@ class Criar extends React.Component {
     /*Assim consigo guardar cada projeto em uma chave diferente */
     alert("Salvo com sucesso!!!");
   } catch (erro) {
-    alert("Erro ao salvar os dados"); 
+    alert("Erro"); 
   }
 }
   /*Função que grava na memoria do celular, foi necessario modificar a função, pois eu estava querendo salvar todos separadamente em uma mesma função, oque não é possivel-> para resolver criei um objeto que guarda os estados atuais dos botões e dps para guardar no AsyncStorage tive que transformar esse objeto em string pois senão a função não aceitaria*/
@@ -186,7 +211,7 @@ class Projeto1 extends React.Component{
       });
     }
   } catch (error) {
-    console.error("Erro ao recuperar dados");
+    alert("Erro");
   }
 }
 
@@ -256,7 +281,7 @@ class Projeto2 extends React.Component{
       });
     }
   } catch (error) {
-    console.error("Erro ao recuperar dados");
+    alert("Erro");
   }
 }
 
@@ -325,7 +350,7 @@ class Projeto3 extends React.Component{
       });
     }
   } catch (error) {
-    console.error("Erro ao recuperar dados");
+    alert("Erro");
   }
 }
 
@@ -394,7 +419,7 @@ class Projeto4 extends React.Component{
       });
     }
   } catch (error) {
-    console.error("Erro ao recuperar dados");
+    alert("Erro");
   }
 }
 
