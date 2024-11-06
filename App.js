@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { TextInput, Text, View, Button,TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+import { TextInput, Text, View, Button,TouchableOpacity, StyleSheet, ImageBackground, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useFocusEffect } from '@react-navigation/native';
+import * as Haptics from 'expo-haptics';
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
 
 class Sobre extends React.Component{
   render(){
@@ -24,10 +24,12 @@ class Sobre extends React.Component{
 class Menu extends React.Component{
   render(){
     return(
-    <ImageBackground source={require('./assets/Tela2.png')} style={estilos.fundo} imageStyle={{ opacity: 0.5}}>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Button title="Começar" onPress={()=>this.props.navigation.navigate("Principal")}></Button>
-        <Button title="Sobre" onPress={()=>this.props.navigation.navigate("Sobre")}></Button>
+    <ImageBackground source={require('./assets/pincel2.png')} style={estilos.fundo} imageStyle={{ opacity: 0.5}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{ flexDirection: 'row'}}>
+          <TouchableOpacity onPress={()=>this.props.navigation.navigate("Principal")} style={estilos.botaoM}><Text style = {estilos.textoM}>{"Começar"}</Text></TouchableOpacity>
+          <TouchableOpacity onPress={()=>this.props.navigation.navigate("Sobre")} style={estilos.botaoM}><Text style = {estilos.textoM}>{"Sobre"}</Text></TouchableOpacity>
+        </View>
       </View>
   </ImageBackground>
     )
@@ -100,6 +102,25 @@ class Criar extends React.Component {
     }));
   };
   /*Nessa função eu pego e comparo se o estado do id(nesse caso b1, b2 ...) é o da cor branca, ou preta e as inverto*/
+  certeza = () => {
+    Alert.alert(
+      "Confirmação","Deseja mesmo Salvar?",
+      [
+        {
+          text: "Não",
+          onPress: () => console.log("Ação cancelada"),
+          style: "cancel"
+        },
+        {
+          text: "Sim",
+          onPress: () => this.gravar()
+        }
+      ],
+      { cancelable: false } 
+    );
+  }
+  /*Cria um alerta com dois botões -> para o usuario ter que confirmar se quer msm salvar*/
+
   apagar = () => {
     this.setState({
       b1: '#FFFFFF',
@@ -233,6 +254,9 @@ class Criar extends React.Component {
       await AsyncStorage.setItem(`estados_p${this.state.p}`, JSON.stringify(estado));
       /*Assim consigo guardar cada projeto em uma chave diferente */
       alert("Salvo com sucesso!!!");
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
+      /*Vibra o celular*/
+      
     } catch (erro) {
       alert("Erro"); 
     }
@@ -331,7 +355,8 @@ class Criar extends React.Component {
             <Text style={[estilos.blocos, { backgroundColor: this.state.b25 }]}></Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => this.gravar()} style={estilos.botao}><Text>{"Salvar"}</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => this.certeza()}
+              style={estilos.botao}><Text>{"Salvar"}</Text></TouchableOpacity>
       </View>
     );
   }
@@ -923,6 +948,19 @@ const estilos = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  botaoM:{
+    margin: 3,
+    padding: 5,
+    backgroundColor: "#063970",
+    borderRadius: 5,
+    width: 100,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  textoM:{
+    color: '#FFFFFF'
   }
 })
 
