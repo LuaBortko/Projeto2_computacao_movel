@@ -1,34 +1,27 @@
 import * as React from 'react';
-import { TextInput, Text, View, Button,TouchableOpacity, StyleSheet, ImageBackground, Alert } from 'react-native';
+import { TextInput, Text, View,TouchableOpacity, StyleSheet, ImageBackground, Alert, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {MaterialCommunityIcons} from '@expo/vector-icons';
+//import {MaterialCommunityIcons} from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as Haptics from 'expo-haptics';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-class Sobre extends React.Component{
-  render(){
-    return(
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>{"AAAAAA"}</Text>
-      <Button title="Voltar" onPress={()=>this.props.navigation.goBack()}></Button>
-    </View>
-    )
-  }
-}
-
 class Menu extends React.Component{
   render(){
     return(
-    <ImageBackground source={require('./assets/pincel2.png')} style={estilos.fundo} imageStyle={{ opacity: 0.5}}>
+    <ImageBackground source={require('./assets/pincel2.png')} style={estilos.fundo} imageStyle={{ opacity: 0.4}}>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Image
+        source={require('./assets/Logo_PixelArt.png')} // Caminho da imagem local
+        style={{height: 500, width: 500}} // Estilos da imagem
+      />
         <View style={{ flexDirection: 'row'}}>
           <TouchableOpacity onPress={()=>this.props.navigation.navigate("Principal")} style={estilos.botaoM}><Text style = {estilos.textoM}>{"Começar"}</Text></TouchableOpacity>
-          <TouchableOpacity onPress={()=>this.props.navigation.navigate("Sobre")} style={estilos.botaoM}><Text style = {estilos.textoM}>{"Sobre"}</Text></TouchableOpacity>
         </View>
       </View>
   </ImageBackground>
@@ -44,12 +37,14 @@ class Projetos extends React.Component{
   render(){
     return(
     <ImageBackground source={require('./assets/Tela2.png')} style={estilos.fundo} imageStyle={{ opacity: 0.5}}>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
-        <TouchableOpacity onPress={() => this.decide(1)} style={estilos.botao}><Text>{"Projeto1"}</Text></TouchableOpacity>
-        <TouchableOpacity onPress={() => this.decide(2)} style={estilos.botao}><Text>{"Projeto2"}</Text></TouchableOpacity>
-        <TouchableOpacity onPress={() => this.decide(3)} style={estilos.botao}><Text>{"Projeto3"}</Text></TouchableOpacity>
-        <TouchableOpacity onPress={() => this.decide(4)} style={estilos.botao}><Text>{"Projeto4"}</Text></TouchableOpacity>
+       <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.home}>
+         <MaterialCommunityIcons name="home" color={"#063970"} size={30}/>
+        </TouchableOpacity>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'  }}>
+        <TouchableOpacity onPress={() => this.decide(1)} style={estilos.botaoP}><Text style={estilos.textoP}>{"Projeto1"}</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => this.decide(2)} style={estilos.botaoP}><Text style={estilos.textoP}>{"Projeto2"}</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => this.decide(3)} style={estilos.botaoP}><Text style={estilos.textoP}>{"Projeto3"}</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => this.decide(4)} style={estilos.botaoP}><Text style={estilos.textoP}>{"Projeto4"}</Text></TouchableOpacity>
       </View>
     </ImageBackground>
     )
@@ -91,11 +86,7 @@ class Criar extends React.Component {
       b25: '#FFFFFF'
     };
   }
-  /* 
-   handlePress = (id) => { -> assim posso passar parametros para uma função
-    alert(`Botão ${id} pressionado!`);
-  };
-  */
+
   pintar = (id) => {
     this.setState((prevState) => ({
       [id]: prevState[id] === '#FFFFFF' ? '#000000' : '#FFFFFF', 
@@ -103,6 +94,8 @@ class Criar extends React.Component {
   };
   /*Nessa função eu pego e comparo se o estado do id(nesse caso b1, b2 ...) é o da cor branca, ou preta e as inverto*/
   certeza = () => {
+    this.gravar()
+    /*
     Alert.alert(
       "Confirmação","Deseja mesmo Salvar?",
       [
@@ -118,6 +111,7 @@ class Criar extends React.Component {
       ],
       { cancelable: false } 
     );
+    */
   }
   /*Cria um alerta com dois botões -> para o usuario ter que confirmar se quer msm salvar*/
 
@@ -265,98 +259,110 @@ class Criar extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-       <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.botao}><Text>{"Menu"}</Text></TouchableOpacity>
-       <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={estilos.botao}><Text>{"Voltar"}</Text></TouchableOpacity>
-       <TouchableOpacity onPress={()=>this.apagar()} style={estilos.botao}><Text>{"Apaga"}</Text></TouchableOpacity>
-       <TouchableOpacity onPress={()=>this.fundo()} style={estilos.botao}><Text>{"Fundo"}</Text></TouchableOpacity>
-        <View style={estilos.quadrado}>
-          <TouchableOpacity onPress={() => this.pintar('b1')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b1 }]}></Text>
+      <View style={estilos.fundo2}>
+
+          <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")} style={estilos.home}>
+          <MaterialCommunityIcons name="home" color={"#063970"} size={30}/>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b2')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b2 }]}></Text>
+          <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={estilos.volta}>
+          <MaterialCommunityIcons name="arrow-left-thick" color={"#063970"} size={30}/>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b3')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b3 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b4')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b4 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b5')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b5 }]}></Text>
-          </TouchableOpacity>
-        </View>
-        <View style={estilos.quadrado}>
-          <TouchableOpacity onPress={() => this.pintar('b6')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b6 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b7')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b7 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b8')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b8 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b9')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b9 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b10')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b10 }]}></Text>
-          </TouchableOpacity>
-        </View>
-        <View style={estilos.quadrado}>
-          <TouchableOpacity onPress={() => this.pintar('b11')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b11 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b12')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b12 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b13')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b13 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b14')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b14 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b15')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b15 }]}></Text>
-          </TouchableOpacity>
-        </View>
-        <View style={estilos.quadrado}>
-          <TouchableOpacity onPress={() => this.pintar('b16')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b16 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b17')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b17 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b18')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b18 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b19')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b19 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b20')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b20 }]}></Text>
-          </TouchableOpacity>
-        </View>
-        <View style={estilos.quadrado}>
-          <TouchableOpacity onPress={() => this.pintar('b21')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b21 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b22')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b22 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b23')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b23 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b24')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b24 }]}></Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.pintar('b25')}>
-            <Text style={[estilos.blocos, { backgroundColor: this.state.b25 }]}></Text>
-          </TouchableOpacity>
+
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+
+          <TouchableOpacity onPress={()=>this.apagar()} style={estilos.home}>
+          <MaterialCommunityIcons name="eraser" color={"#1d5999"} size={30}/></TouchableOpacity>
+          <TouchableOpacity onPress={()=>this.fundo()} style={estilos.volta}>
+          <MaterialCommunityIcons name="format-paint" color={"#1d5999"} size={30}/></TouchableOpacity>
+        
+          <View style={estilos.quadrado}>
+            <TouchableOpacity onPress={() => this.pintar('b1')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b1 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b2')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b2 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b3')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b3 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b4')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b4 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b5')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b5 }]}></Text>
+            </TouchableOpacity>
+          </View>
+          <View style={estilos.quadrado}>
+            <TouchableOpacity onPress={() => this.pintar('b6')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b6 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b7')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b7 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b8')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b8 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b9')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b9 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b10')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b10 }]}></Text>
+            </TouchableOpacity>
+          </View>
+          <View style={estilos.quadrado}>
+            <TouchableOpacity onPress={() => this.pintar('b11')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b11 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b12')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b12 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b13')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b13 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b14')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b14 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b15')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b15 }]}></Text>
+            </TouchableOpacity>
+          </View>
+          <View style={estilos.quadrado}>
+            <TouchableOpacity onPress={() => this.pintar('b16')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b16 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b17')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b17 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b18')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b18 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b19')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b19 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b20')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b20 }]}></Text>
+            </TouchableOpacity>
+          </View>
+          <View style={estilos.quadrado}>
+            <TouchableOpacity onPress={() => this.pintar('b21')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b21 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b22')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b22 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b23')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b23 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b24')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b24 }]}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.pintar('b25')}>
+              <Text style={[estilos.blocos, { backgroundColor: this.state.b25 }]}></Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <TouchableOpacity onPress={() => this.certeza()}
-              style={estilos.botao}><Text>{"Salvar"}</Text></TouchableOpacity>
+                style={estilos.botaoP}><Text style={estilos.textoP}>{"Salvar"}</Text></TouchableOpacity>
       </View>
     );
   }
@@ -914,7 +920,6 @@ class App extends React.Component {
      <Stack.Navigator>
       <Stack.Screen name = "Menu" component ={Menu} options = {{headerShown: false}}/>
       <Stack.Screen name = "Principal" component ={Principal} options = {{headerShown: false}}/>
-      <Stack.Screen name = "Sobre" component = {Sobre}/>
      </Stack.Navigator>
     </NavigationContainer>
     )
@@ -922,20 +927,20 @@ class App extends React.Component {
 }
 
 const estilos = StyleSheet.create({
-  blocos:{
+  blocos:{ //pixels
     width:30,
     height:30,
     backgroundColor: '#FFFFFF',
     borderColor: 'black',
     borderWidth: 1,
   },
-  quadrado:{
+  quadrado:{  //Linhas
     width: 180, 
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center'
   },
-  botao:{ //mudar dps
+  botao:{ 
     margin: 20,
     backgroundColor: '#4CAF50', 
     padding: 10, 
@@ -949,18 +954,68 @@ const estilos = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  botaoM:{
-    margin: 3,
+  fundo2:{ //fundos sem imagem
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5edda',
+  },
+  botaoM:{ //botão do menu
+    margin: 15,
     padding: 5,
     backgroundColor: "#063970",
     borderRadius: 5,
     width: 100,
     height: 50,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderColor: 'black',
+    borderWidth: 3
   },
-  textoM:{
-    color: '#FFFFFF'
+  textoM:{ //texto do botaoM
+    fontSize: 20,
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    textShadowColor: '#000000', 
+    textShadowOffset: { width: 1, height: 1 }, 
+    textShadowRadius: 10, 
+  },
+  botaoP:{ //botão do menu projetos
+    margin: 20,
+    padding: 5,
+    borderRadius: 18,
+    width: 170,
+    height: 70,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#063970',
+    borderWidth: 5,
+    backgroundColor: 'rgba(60, 110, 163, 0.3)',
+    
+  },
+  textoP:{ //texto do botaoP
+    fontSize: 30,
+    color: '#063970',
+    fontWeight: 'bold',
+   
+  },
+  home:{ //botao menu
+    margin: 30,
+    borderColor: '#063970',
+    borderWidth: 3,
+    borderRadius: 5,
+    position: 'absolute',
+    top: 30,
+    right: 0
+  },
+  volta:{ //botao volta
+    margin: 30,
+    borderColor: '#063970',
+    borderWidth: 3,
+    borderRadius: 5,
+    position: 'absolute',
+    top: 30,
+    left: 0
   }
 })
 
