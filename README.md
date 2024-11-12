@@ -13,7 +13,7 @@ A escolha por desenvolver um aplicativo sobre pixel art surgiu a partir de uma n
 
 # Objetivo
 
-O objetivo principal deste projeto é desenvolver um aplicativo mobile funcional em React Native que é possível desenhar por pixels, como também salvar esses desenhos na memória do dispositivo.
+O objetivo principal deste projeto é desenvolver um aplicativo mobile funcional em React Native que é possível desenhar por pixels em uma tela 5x5, como também salvar esses desenhos na memória do dispositivo.
 
 Além disso, o projeto busca:
 
@@ -59,3 +59,8 @@ O aplicativo desenvolvido conta com as seguintes funcionalidades:
 # Conclusão
 
 A partir do desenvolvimento deste projeto, os objetivos propostos foram concluídos com sucesso. Um dos maiores desafios enfrentados foi o tempo limitado e a falta de conhecimento em algumas áreas do React Native. No entanto, ao longo do processo, adquiri muitos conhecimentos sobre essa ferramenta, o que fez deste projeto um grande passo para o meu aprendizado. Se houvesse mais tempo uma melhoria a ser implementada neste projeto seria a melhora na otimização, principalmente na parte dos botões(b1…b25), e com isso aumentar o número de pixels que o usuário pode utilizar. 
+
+# Link para video de demonstração
+
+[Assista ao vídeo](https://youtube.com/shorts/27BL-3otl-I?feature=share)
+
